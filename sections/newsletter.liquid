@@ -1,0 +1,206 @@
+{%- comment -%}
+  Newsletter / Love Club Section
+{%- endcomment -%}
+
+<section class="newsletter section" id="newsletter-{{ section.id }}">
+  <div class="newsletter__background" style="background-image: url('{{ section.settings.background_image | default: 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=1920' | image_url: width: 1920 }}');">
+    <div class="newsletter__overlay"></div>
+  </div>
+  
+  <div class="newsletter__content container">
+    <div class="newsletter__inner">
+      <h2 class="newsletter__title">{{ section.settings.title | default: 'Join Our Love Club' }}</h2>
+      <p class="newsletter__subtitle">{{ section.settings.subtitle | default: 'Get exclusive offers and romantic inspiration delivered to your inbox' }}</p>
+      
+      {%- form 'customer', class: 'newsletter__form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="newsletter__input-group">
+          <input type="email" name="contact[email]" class="newsletter__input" placeholder="{{ section.settings.placeholder | default: 'Your email address' }}" required aria-label="Email address">
+          <button type="submit" class="btn btn--primary btn--large">{{ section.settings.button_text | default: 'Subscribe' }}</button>
+        </div>
+        {%- if form.posted_successfully? -%}
+          <p class="newsletter__success">Thank you for subscribing!</p>
+        {%- elsif form.errors -%}
+          <p class="newsletter__error">{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</p>
+        {%- endif -%}
+      {%- endform -%}
+      
+      {%- if section.settings.show_discount -%}
+        <p class="newsletter__discount">{{ section.settings.discount_text | default: 'Get 10% off your first order!' }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .newsletter {
+    position: relative;
+    padding: 6rem 0;
+    overflow: hidden;
+  }
+
+  .newsletter__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .newsletter__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(232, 180, 184, 0.9) 0%, rgba(212, 165, 165, 0.85) 100%);
+  }
+
+  .newsletter__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .newsletter__inner {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+    color: var(--color-white, #FFFFFF);
+  }
+
+  .newsletter__title {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 1rem;
+    color: var(--color-white, #FFFFFF);
+  }
+
+  .newsletter__subtitle {
+    font-size: 1.125rem;
+    margin-bottom: 2.5rem;
+    opacity: 0.95;
+  }
+
+  .newsletter__form {
+    margin-bottom: 1.5rem;
+  }
+
+  .newsletter__input-group {
+    display: flex;
+    gap: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .newsletter__input {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-lg, 12px);
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--color-charcoal, #2C2C2C);
+  }
+
+  .newsletter__input:focus {
+    outline: none;
+    border-color: var(--color-white, #FFFFFF);
+    background: var(--color-white, #FFFFFF);
+  }
+
+  .newsletter__input::placeholder {
+    color: rgba(44, 44, 44, 0.5);
+  }
+
+  .newsletter__success,
+  .newsletter__error {
+    margin-top: 1rem;
+    font-size: 0.9375rem;
+  }
+
+  .newsletter__success {
+    color: var(--color-white, #FFFFFF);
+  }
+
+  .newsletter__error {
+    color: var(--color-white, #FFFFFF);
+  }
+
+  .newsletter__discount {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0;
+    opacity: 0.95;
+  }
+
+  @media (max-width: 768px) {
+    .newsletter {
+      padding: 4rem 0;
+    }
+
+    .newsletter__input-group {
+      flex-direction: column;
+    }
+
+    .newsletter__input-group .btn {
+      width: 100%;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Join Our Love Club"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Get exclusive offers and romantic inspiration delivered to your inbox"
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Input Placeholder",
+      "default": "Your email address"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Subscribe"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_discount",
+      "label": "Show Discount Text",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "discount_text",
+      "label": "Discount Text",
+      "default": "Get 10% off your first order!"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter"
+    }
+  ]
+}
+{% endschema %}

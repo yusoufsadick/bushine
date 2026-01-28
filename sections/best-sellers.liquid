@@ -1,0 +1,82 @@
+{%- comment -%}
+  Best Sellers Section
+{%- endcomment -%}
+
+{%- assign collection = collections[section.settings.collection] | default: collections.all -%}
+
+<section class="best-sellers section" id="best-sellers-{{ section.id }}">
+  <div class="container">
+    <div class="section__header">
+      <h2 class="section__title">{{ section.settings.title | default: 'Best Sellers' }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="section__subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="best-sellers__grid grid grid--4">
+      {%- for product in collection.products limit: section.settings.products_to_show -%}
+        {% render 'product-card', product: product %}
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.show_view_all -%}
+      <div class="best-sellers__footer text-center">
+        <a href="{{ collection.url }}" class="btn btn--outline">View All Products</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  .best-sellers {
+    background: var(--color-white, #FFFFFF);
+  }
+
+  .best-sellers__footer {
+    margin-top: 3rem;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Best Sellers",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Best Sellers"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 4,
+      "max": 16,
+      "step": 4,
+      "default": 8
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show 'View All' button",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Best Sellers"
+    }
+  ]
+}
+{% endschema %}

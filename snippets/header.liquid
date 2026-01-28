@@ -1,0 +1,500 @@
+{%- comment -%}
+  Premium Sticky Header for RASHINE Valentine Store
+{%- endcomment -%}
+
+<header class="header" role="banner">
+  <div class="header__inner container">
+    <div class="header__left">
+      {%- comment -%} Logo {%- endcomment -%}
+      <div class="header__logo">
+        <a href="{{ routes.root_url }}" class="logo" aria-label="{{ shop.name }}">
+          {%- if settings.logo != blank -%}
+            <img src="{{ settings.logo | image_url: width: 200 }}" alt="{{ shop.name }}" loading="eager" width="{{ settings.logo.width }}" height="{{ settings.logo.height }}">
+          {%- else -%}
+            <span class="logo__text">{{ shop.name }}</span>
+          {%- endif -%}
+        </a>
+      </div>
+
+      {%- comment -%} Desktop Navigation {%- endcomment -%}
+      <nav class="header__nav" role="navigation" aria-label="Main navigation">
+        <ul class="nav nav--desktop">
+          {%- for link in linklists.main-menu.links -%}
+            <li class="nav__item {% if link.links != blank %}dropdown{% endif %}">
+              <a href="{{ link.url }}" class="nav__link {% if link.links != blank %}dropdown-trigger{% endif %}">
+                {{ link.title }}
+                {%- if link.links != blank -%}
+                  <svg class="icon icon-chevron-down" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                {%- endif -%}
+              </a>
+              
+              {%- if link.links != blank -%}
+                <div class="dropdown-menu">
+                  <ul class="dropdown-menu__list">
+                    {%- for childlink in link.links -%}
+                      <li class="dropdown-menu__item">
+                        <a href="{{ childlink.url }}" class="dropdown-menu__link">{{ childlink.title }}</a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    </div>
+
+    <div class="header__right">
+      {%- comment -%} Search {%- endcomment -%}
+      <div class="header__search">
+        <button type="button" class="search-toggle" aria-label="Search">
+          <svg class="icon icon-search" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 17C13.4183 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M19 19L14.65 14.65" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        
+        <div class="search-form">
+          <form action="{{ routes.search_url }}" method="get" role="search">
+            <input type="search" name="q" class="search-input" placeholder="Search for gifts..." value="{{ search.terms | escape }}" autocomplete="off">
+            <button type="submit" class="search-submit" aria-label="Submit search">
+              <svg class="icon icon-search" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 17C13.4183 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M19 19L14.65 14.65" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button type="button" class="search-close" aria-label="Close search">
+              <svg class="icon icon-close" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      {%- comment -%} Account {%- endcomment -%}
+      <div class="header__account">
+        <a href="{{ routes.account_login_url }}" class="header__icon" aria-label="Account">
+          <svg class="icon icon-user" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 10C12.7614 10 15 7.76142 15 5C15 2.23858 12.7614 0 10 0C7.23858 0 5 2.23858 5 5C5 7.76142 7.23858 10 10 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M0 20C0 15.5817 4.47715 12 10 12C15.5228 12 20 15.5817 20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      {%- comment -%} Wishlist (Optional) {%- endcomment -%}
+      <div class="header__wishlist">
+        <a href="{{ routes.account_url }}" class="header__icon" aria-label="Wishlist">
+          <svg class="icon icon-heart" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.3667 3.84167C16.941 3.41589 16.4357 3.0801 15.8793 2.8556C15.3229 2.6311 14.7271 2.52246 14.125 2.53667C13.5229 2.52246 12.9271 2.6311 12.3707 2.8556C11.8143 3.0801 11.309 3.41589 10.8833 3.84167L10 4.725L9.11667 3.84167C8.25893 2.98393 7.09167 2.53714 5.875 2.53714C4.65833 2.53714 3.49107 2.98393 2.63333 3.84167C1.77559 4.69941 1.3288 5.86667 1.3288 7.08333C1.3288 8.3 1.77559 9.46726 2.63333 10.325L3.51667 11.2083L10 17.6917L16.4833 11.2083L17.3667 10.325C17.7925 9.89926 18.1283 9.39393 18.3528 8.83753C18.5773 8.28113 18.6859 7.68534 18.6717 7.08333C18.6859 6.48132 18.5773 5.88553 18.3528 5.32913C18.1283 4.77273 17.7925 4.2674 17.3667 3.84167Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      {%- comment -%} Cart {%- endcomment -%}
+      <div class="header__cart">
+        <button type="button" class="cart-toggle header__icon" aria-label="Shopping cart">
+          <svg class="icon icon-cart" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1H4.27273L6.46545 12.4773C6.54018 12.8719 6.7452 13.236 7.04436 13.5057C7.34351 13.7754 7.71784 13.9352 8.10909 13.9545H16.2727C16.664 13.9352 17.0383 13.7754 17.3375 13.5057C17.6366 13.236 17.8416 12.8719 17.9164 12.4773L19 5.81818H5.09091" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M7.72727 19C8.27956 19 8.72727 18.5523 8.72727 18C8.72727 17.4477 8.27956 17 7.72727 17C7.17498 17 6.72727 17.4477 6.72727 18C6.72727 18.5523 7.17498 19 7.72727 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M17 19C17.5523 19 18 18.5523 18 18C18 17.4477 17.5523 17 17 17C16.4477 17 16 17.4477 16 18C16 18.5523 16.4477 19 17 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="cart-count" style="display: none;">0</span>
+        </button>
+      </div>
+
+      {%- comment -%} Mobile Menu Toggle {%- endcomment -%}
+      <button type="button" class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+        <span class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  {%- comment -%} Mobile Menu {%- endcomment -%}
+  <nav class="mobile-menu" role="navigation" aria-label="Mobile navigation">
+    <div class="mobile-menu__inner">
+      <ul class="nav nav--mobile">
+        {%- for link in linklists.main-menu.links -%}
+          <li class="nav__item">
+            <a href="{{ link.url }}" class="nav__link">{{ link.title }}</a>
+            {%- if link.links != blank -%}
+              <ul class="nav__submenu">
+                {%- for childlink in link.links -%}
+                  <li class="nav__item">
+                    <a href="{{ childlink.url }}" class="nav__link">{{ childlink.title }}</a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </nav>
+
+  {%- comment -%} Menu Overlay {%- endcomment -%}
+  <div class="menu-overlay"></div>
+</header>
+
+{%- comment -%} Mini Cart {%- endcomment -%}
+{% render 'mini-cart' %}
+
+{%- comment -%} Cart Overlay {%- endcomment -%}
+<div class="cart-overlay"></div>
+
+<style>
+  /* Header Styles */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .header--scrolled {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 2rem;
+    gap: 2rem;
+  }
+
+  .header__left {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    flex: 1;
+  }
+
+  .header__logo {
+    flex-shrink: 0;
+  }
+
+  .logo {
+    display: block;
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-charcoal, #2C2C2C);
+    text-decoration: none;
+  }
+
+  .logo img {
+    max-height: 50px;
+    width: auto;
+  }
+
+  .logo__text {
+    display: block;
+  }
+
+  /* Desktop Navigation */
+  .nav--desktop {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .nav__link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-charcoal, #2C2C2C);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    position: relative;
+  }
+
+  .nav__link:hover {
+    color: var(--color-rose, #D4A5A5);
+  }
+
+  .nav__link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 1rem;
+    right: 1rem;
+    height: 2px;
+    background: var(--gradient-rose, linear-gradient(135deg, #E8B4B8 0%, #D4A5A5 100%));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  .nav__link:hover::after {
+    transform: scaleX(1);
+  }
+
+  /* Dropdown Menu */
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 200px;
+    background: var(--color-white, #FFFFFF);
+    border-radius: var(--radius-lg, 12px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1001;
+    margin-top: 1rem;
+  }
+
+  .dropdown.is-open .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .dropdown-menu__list {
+    padding: 0.5rem 0;
+  }
+
+  .dropdown-menu__item {
+    display: block;
+  }
+
+  .dropdown-menu__link {
+    display: block;
+    padding: 0.75rem 1.5rem;
+    color: var(--color-charcoal, #2C2C2C);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .dropdown-menu__link:hover {
+    background: rgba(212, 165, 165, 0.1);
+    color: var(--color-rose, #D4A5A5);
+  }
+
+  /* Header Right */
+  .header__right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .header__icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    color: var(--color-charcoal, #2C2C2C);
+    transition: color 0.2s ease;
+    cursor: pointer;
+  }
+
+  .header__icon:hover {
+    color: var(--color-rose, #D4A5A5);
+  }
+
+  .cart-count {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    background: var(--color-soft-red, #E8B4B8);
+    color: var(--color-white, #FFFFFF);
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 10px;
+  }
+
+  /* Search Form */
+  .search-form {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--color-white, #FFFFFF);
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 2000;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .search-form.is-active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .search-form form {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .search-input {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    font-size: 1.125rem;
+    border: 2px solid rgba(44, 44, 44, 0.1);
+    border-radius: var(--radius-lg, 12px);
+  }
+
+  .search-input:focus {
+    outline: none;
+    border-color: var(--color-rose, #D4A5A5);
+  }
+
+  /* Mobile Menu Toggle */
+  .mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--color-charcoal, #2C2C2C);
+    transition: all 0.3s ease;
+  }
+
+  .mobile-menu-toggle.is-active .hamburger span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+  }
+
+  .mobile-menu-toggle.is-active .hamburger span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-menu-toggle.is-active .hamburger span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+
+  /* Mobile Menu */
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: 320px;
+    height: 100vh;
+    background: var(--color-white, #FFFFFF);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1500;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+  }
+
+  .mobile-menu.is-open {
+    transform: translateX(0);
+  }
+
+  .mobile-menu__inner {
+    padding: 2rem;
+  }
+
+  .nav--mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .nav--mobile .nav__item {
+    border-bottom: 1px solid rgba(44, 44, 44, 0.1);
+  }
+
+  .nav--mobile .nav__link {
+    display: block;
+    padding: 1.25rem 0;
+    font-size: 1.125rem;
+    color: var(--color-charcoal, #2C2C2C);
+  }
+
+  .nav__submenu {
+    padding-left: 1.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1400;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .menu-overlay.is-active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .header__nav {
+      display: none;
+    }
+
+    .mobile-menu-toggle {
+      display: flex;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .header__inner {
+      padding: 1rem 1.5rem;
+    }
+
+    .header__wishlist {
+      display: none;
+    }
+  }
+</style>

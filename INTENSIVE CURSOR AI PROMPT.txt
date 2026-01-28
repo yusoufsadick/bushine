@@ -1,0 +1,439 @@
+# 🔥 INTENSIVE CURSOR AI PROMPT — SHOPIFY VALENTINE SUPER STORE
+
+You are a senior Shopify + Liquid + UI/UX engineer and designer.
+Your task is to build a **premium, sexy, high-conversion Valentine’s gift store** on Shopify using **Liquid, HTML, CSS, and JavaScript**, optimized for speed, beauty, and sales.
+
+## 🎯 BRAND & STYLE
+
+* Theme style: **Luxury, romantic, modern, premium**
+* Primary colors:
+
+  * Soft red / rose
+  * Soft pink
+  * Warm beige
+  * Black & charcoal accents
+* Background: **White mode only**
+* DO NOT use green, blue, or purple as primary colors
+* Typography: Elegant, modern, romantic feel
+* UI vibe: **Sexy, smooth, Apple-level premium, emotionally attractive**
+
+---
+
+## 🧭 HEADER (TOP NAVIGATION — MUST IMPLEMENT)
+
+Create a sticky, premium header with:
+
+* Logo (left)
+* Navigation links:
+
+  * Category (dropdown mega menu)
+  * Collections
+  * Best Sellers
+  * Gift Bundles
+  * Personalized Gifts
+  * Deals / Valentine Sale
+  * About Us
+  * Contact
+* Search input (center or right)
+* Account icon (login/register)
+* Cart icon (with live cart count + mini cart)
+* Wishlist icon (optional but recommended)
+
+Make header:
+
+* Sticky
+* Glass / subtle shadow
+* Smooth hover animations
+* Mobile responsive with hamburger menu
+
+---
+
+## 🏠 HOMEPAGE SECTIONS (BUILD ALL)
+
+Create beautiful, premium homepage sections:
+
+1. **Hero Section**
+
+   * Big romantic headline
+   * Valentine emotional copy
+   * CTA buttons: Shop Gifts / Shop for Her / Shop for Him
+   * Background image from high-quality stock (romantic couple, roses, gifts)
+   * Parallax or subtle motion
+
+2. **Featured Categories**
+
+   * Gift Boxes
+   * Flowers & Chocolates
+   * Personalized Gifts
+   * Jewelry & Accessories
+   * Romantic Cards
+     Use beautiful image cards with hover effects
+
+3. **Best Sellers**
+
+   * Product grid
+   * Badges: “Hot”, “Limited”, “Valentine Pick”
+
+4. **Valentine Gift Bundles**
+
+   * Custom layout for bundles
+   * Emotional copy
+   * Big savings badges
+
+5. **Why Choose Us**
+
+   * Fast delivery
+   * Perfect gift guarantee
+   * Premium packaging
+   * Love-inspired designs
+
+6. **Testimonials / Love Stories**
+
+   * Romantic customer quotes
+
+7. **Newsletter / Love Club**
+
+   * Valentine email signup
+   * Discount offer
+
+---
+
+## 🗂️ CATEGORY & COLLECTION PAGES
+
+Design premium category layouts:
+
+* Filter sidebar
+* Sorting
+* Beautiful product cards
+* Hover quick add to cart
+* Lazy loading images
+
+---
+
+## 🛍️ PRODUCT PAGE (VERY IMPORTANT)
+
+Create premium product page with:
+
+* Large gallery
+* Zoom on hover
+* Thumbnail slider
+* Gift wrap option
+* Add personalized text option
+* Trust badges
+* Valentine urgency copy
+* Sticky add-to-cart
+* Related products slider
+
+---
+
+## 📄 REQUIRED PAGES TO BUILD
+
+Build and style these pages beautifully:
+
+* About Us (romantic brand story)
+* Contact (form + WhatsApp + email)
+* FAQ
+* Shipping & Returns
+* Privacy Policy
+* Terms of Service
+* Valentine Gift Guide
+* Track Order
+* My Account Dashboard
+
+---
+
+## 🖼️ IMAGES (VERY IMPORTANT)
+
+You are allowed to:
+
+* Pull high-quality stock images from online
+* Use Unsplash, Pexels, Shopify stock, or similar
+* Add direct image URLs into sections
+* Use romantic, premium, Valentine-themed images
+* Optimize for performance (lazy loading)
+
+---
+
+## 🎨 UI DETAILS
+
+* Smooth transitions
+* Subtle animations
+* Elegant shadows
+* Rounded cards
+* Luxury spacing
+* Hover micro-interactions
+* Premium product badges
+
+---
+
+## ⚙️ TECH REQUIREMENTS
+
+* Use Shopify Liquid best practices
+* Create reusable sections
+* Clean CSS structure
+* Mobile-first responsive
+* Fast loading
+* SEO-friendly markup
+* Accessible forms and buttons
+
+---
+
+## 🚀 GOAL
+
+The store must feel like:
+
+* A luxury Valentine brand
+* Emotional
+* Trustworthy
+* High-conversion
+* Sexy, premium, irresistible
+
+Build this like a real production Shopify store for a serious Valentine brand.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 🧠 CURSOR AI — PROJECT & USER RULES (SHOPIFY VALENTINE STORE called RASHINE)
+
+## ROLE & MINDSET
+
+You are acting as a **senior Shopify architect, UI/UX designer, and conversion-focused frontend engineer**.
+Always think like you are building a **premium, revenue-generating Valentine’s eCommerce brand**, not a demo project.
+
+Your output must always be:
+
+* Production-ready
+* Clean
+* Maintainable
+* Scalable
+* Visually premium
+
+---
+
+## DESIGN SYSTEM (GLOBAL)
+
+* Mode: **White mode only**
+* Primary vibe: **Luxury, romantic, emotional, premium**
+* Allowed primary colors:
+
+  * Soft red
+  * Rose
+  * Blush pink
+  * Warm beige
+  * Black / charcoal accents
+* Forbidden as primary colors:
+
+  * Green
+  * Blue
+  * Purple
+* Use subtle gradients only in red/rose families
+* Rounded corners
+* Soft shadows
+* Generous spacing
+* Premium typography
+
+---
+
+## UI/UX QUALITY BAR
+
+Every UI must feel:
+
+* Apple-level polish
+* Smooth
+* Sexy
+* Trustworthy
+* High-end brand
+* Emotionally attractive
+* Designed to convert visitors into buyers
+
+Never create:
+
+* Flat, boring layouts
+* Ugly spacing
+* Cheap-looking UI
+* Developer-only looking pages
+
+---
+
+## HEADER & NAVIGATION (GLOBAL RULE)
+
+Always maintain a premium sticky header with:
+
+Required links:
+
+* Category (dropdown / mega menu)
+* Collections
+* Best Sellers
+* Gift Bundles
+* Personalized Gifts
+* Valentine Sale / Deals
+* Gift Guide
+* About Us
+* Contact
+
+Required UI elements:
+
+* Search input
+* Account icon (login/register)
+* Cart icon (with live count + mini cart)
+* Wishlist icon (optional but recommended)
+
+Header must:
+
+* Be sticky
+* Be responsive
+* Have hover animations
+* Feel premium
+
+---
+
+## PAGE TYPES TO ALWAYS SUPPORT
+
+When creating pages or sections, always consider and support:
+
+* Homepage
+* Collection pages
+* Product pages
+* About Us
+* Contact
+* FAQ
+* Shipping & Returns
+* Privacy Policy
+* Terms
+* Gift Guide
+* Track Order
+* Account Dashboard
+
+All pages must look:
+
+* Branded
+* Designed
+* Emotionally engaging
+* Not default Shopify
+
+---
+
+## PRODUCT PAGE RULES (CRITICAL)
+
+Product pages must always include:
+
+* Large image gallery
+* Image zoom
+* Thumbnails
+* Sticky add-to-cart
+* Trust badges
+* Gift wrap option
+* Personalized text option
+* Valentine urgency copy
+* Related products
+* Reviews section
+
+---
+
+## IMAGE & MEDIA RULES
+
+You are allowed to:
+
+* Pull stock images from (pulll free images to avoid suspension):
+
+  * Unsplash
+  * Pexels
+  * Shopify stock
+* Use direct image URLs
+* Add hero & section background images
+* Optimize images (lazy loading)
+
+Images must be:
+
+* Romantic
+* High quality
+* Emotion-driven
+* Brand-consistent
+
+---
+
+## CODING STANDARDS
+
+Always:
+
+* Use Shopify Liquid best practices
+* Create reusable sections
+* Keep CSS modular and clean
+* Use semantic HTML
+* Mobile-first responsive design
+* Optimize for performance
+* SEO-friendly markup
+* Clean class naming
+* Avoid inline styles when possible
+
+---
+
+## ANIMATIONS & INTERACTIONS
+
+Add:
+
+* Smooth hover effects
+* Subtle transitions
+* Micro-interactions
+* Elegant motion (not flashy)
+
+Avoid:
+
+* Heavy animations
+* Slow-loading effects
+* Cheap transitions
+
+---
+
+## BUSINESS & CONVERSION THINKING
+
+Always design with:
+
+* Emotional copy
+* Trust building
+* Urgency
+* Clear CTAs
+* Gift-focused messaging
+* Valentine emotional triggers
+
+Think like a marketer + designer + engineer.
+
+---
+
+## OUTPUT QUALITY RULE
+
+Never output:
+
+* Placeholder-only UI
+* Basic boilerplate
+* Ugly default Shopify layouts
+* Low-effort code
+
+Always output:
+
+* Premium UI
+* Production-grade code
+* Real-world eCommerce structure
+* Conversion-focused layout
+
+---
+
+## FINAL PRINCIPLE
+
+Build every component as if this is a **real luxury Valentine brand that must generate serious revenue**.
+
+No shortcuts.
+No ugly UI.
+No boring sections.
+
+---

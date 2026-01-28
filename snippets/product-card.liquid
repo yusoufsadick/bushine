@@ -1,0 +1,168 @@
+{%- comment -%}
+  Product Card Snippet - Reusable Product Card Component
+{%- endcomment -%}
+
+<div class="product-card card">
+  <a href="{{ product.url }}" class="product-card__link">
+    <div class="product-card__image">
+      {%- if product.featured_image -%}
+        <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" loading="lazy" class="product-card__img">
+        {%- if product.images.size > 1 -%}
+          <img src="{{ product.images[1] | image_url: width: 400 }}" alt="{{ product.title | escape }}" loading="lazy" class="product-card__img product-card__img--hover">
+        {%- endif -%}
+      {%- else -%}
+        <img src="https://via.placeholder.com/400x400" alt="{{ product.title | escape }}" loading="lazy">
+      {%- endif -%}
+      
+      {%- comment -%} Badges {%- endcomment -%}
+      <div class="product-card__badges">
+        {%- if product.compare_at_price > product.price -%}
+          <span class="badge badge--hot">Sale</span>
+        {%- endif -%}
+        {%- if product.tags contains 'limited' -%}
+          <span class="badge badge--limited">Limited</span>
+        {%- endif -%}
+        {%- if product.tags contains 'valentine' -%}
+          <span class="badge badge--valentine">Valentine Pick</span>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Quick Add Button {%- endcomment -%}
+      <div class="product-card__actions">
+        {%- if product.available -%}
+          <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="product-card__form">
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            <button type="submit" class="quick-add-btn btn btn--primary" data-variant-id="{{ product.selected_or_first_available_variant.id }}">
+              Quick Add
+            </button>
+          </form>
+        {%- else -%}
+          <span class="btn btn--outline" disabled>Sold Out</span>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="product-card__content card__content">
+      <h3 class="product-card__title">{{ product.title }}</h3>
+      
+      {%- if product.vendor != blank -%}
+        <p class="product-card__vendor">{{ product.vendor }}</p>
+      {%- endif -%}
+      
+      <div class="product-card__price">
+        {%- if product.compare_at_price > product.price -%}
+          <span class="price--compare">{{ product.compare_at_price | money }}</span>
+        {%- endif -%}
+        <span class="price--current">{{ product.price | money }}</span>
+      </div>
+    </div>
+  </a>
+</div>
+
+<style>
+  .product-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-card__link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .product-card__image {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+    overflow: hidden;
+    background: #f5f5f5;
+  }
+
+  .product-card__img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+  }
+
+  .product-card__img--hover {
+    opacity: 0;
+  }
+
+  .product-card:hover .product-card__img:first-child {
+    opacity: 0;
+  }
+
+  .product-card:hover .product-card__img--hover {
+    opacity: 1;
+  }
+
+  .product-card__badges {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 1;
+  }
+
+  .product-card__actions {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 1;
+  }
+
+  .product-card:hover .product-card__actions {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .product-card__form {
+    width: 100%;
+  }
+
+  .product-card__form .btn {
+    width: 100%;
+  }
+
+  .product-card__title {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: 1.125rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-charcoal, #2C2C2C);
+  }
+
+  .product-card__vendor {
+    font-size: 0.875rem;
+    color: rgba(44, 44, 44, 0.6);
+    margin: 0 0 0.75rem 0;
+  }
+
+  .product-card__price {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .price--compare {
+    text-decoration: line-through;
+    color: rgba(44, 44, 44, 0.5);
+    font-size: 0.9375rem;
+  }
+
+  .price--current {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-rose, #D4A5A5);
+  }
+</style>

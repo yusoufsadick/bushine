@@ -1,0 +1,151 @@
+{%- comment -%}
+  Why Choose Us Section
+{%- endcomment -%}
+
+<section class="why-choose-us section" id="why-choose-us-{{ section.id }}">
+  <div class="container">
+    <div class="section__header">
+      <h2 class="section__title">{{ section.settings.title | default: 'Why Choose Us' }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="section__subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="why-choose-us__grid grid grid--4">
+      {%- for block in section.blocks -%}
+        <div class="why-choose-us__item" {{ block.shopify_attributes }}>
+          <div class="why-choose-us__icon">
+            {%- if block.settings.icon != blank -%}
+              <img src="{{ block.settings.icon | image_url: width: 80 }}" alt="{{ block.settings.title }}" loading="lazy">
+            {%- else -%}
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="2"/>
+                <path d="M32 20V32L40 40" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            {%- endif -%}
+          </div>
+          <h3 class="why-choose-us__title">{{ block.settings.title }}</h3>
+          <p class="why-choose-us__description">{{ block.settings.description }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  .why-choose-us {
+    background: var(--color-white, #FFFFFF);
+  }
+
+  .why-choose-us__item {
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .why-choose-us__icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-rose, #D4A5A5);
+  }
+
+  .why-choose-us__icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .why-choose-us__title {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .why-choose-us__description {
+    font-size: 0.9375rem;
+    color: rgba(44, 44, 44, 0.7);
+    line-height: 1.6;
+    margin: 0;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Why Choose Us",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Why Choose Us"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Fast Delivery"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Quick and reliable shipping to make sure your gift arrives on time"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Why Choose Us",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Fast Delivery",
+            "description": "Quick and reliable shipping to make sure your gift arrives on time"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Perfect Gift Guarantee",
+            "description": "We guarantee your gift will bring a smile or we'll make it right"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Premium Packaging",
+            "description": "Every gift is beautifully wrapped with love and attention to detail"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Love-Inspired Designs",
+            "description": "Curated collection of romantic and thoughtful gift ideas"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

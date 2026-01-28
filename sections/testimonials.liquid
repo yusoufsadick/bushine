@@ -1,0 +1,160 @@
+{%- comment -%}
+  Testimonials / Love Stories Section
+{%- endcomment -%}
+
+<section class="testimonials section" id="testimonials-{{ section.id }}">
+  <div class="container">
+    <div class="section__header">
+      <h2 class="section__title">{{ section.settings.title | default: 'Love Stories' }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="section__subtitle">{{ section.settings.subtitle }}</p>
+      {%- else -%}
+        <p class="section__subtitle">See what our customers are saying about their special moments</p>
+      {%- endif -%}
+    </div>
+
+    <div class="testimonials__slider">
+      <div class="testimonials__grid grid grid--3">
+        {%- for block in section.blocks -%}
+          <div class="testimonial card" {{ block.shopify_attributes }}>
+            <div class="testimonial__content">
+              <div class="testimonial__quote">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10 20C10 15.5817 13.5817 12 18 12C18.5523 12 19 12.4477 19 13C19 13.5523 18.5523 14 18 14C14.6863 14 12 16.6863 12 20C12 23.3137 14.6863 26 18 26C21.3137 26 24 23.3137 24 20C24 15.5817 20.4183 12 16 12C11.5817 12 8 15.5817 8 20C8 24.4183 11.5817 28 16 28C18.2091 28 20.2091 27.1046 21.6569 25.6569C22.0474 25.2663 22.6805 25.2663 23.0711 25.6569C23.4616 26.0474 23.4616 26.6805 23.0711 27.0711C21.2091 28.933 18.7909 30 16 30C10.4772 30 6 25.5228 6 20C6 14.4772 10.4772 10 16 10C20.4183 10 24 13.5817 24 18C24 22.4183 20.4183 26 16 26C11.5817 26 8 22.4183 8 18C8 13.5817 11.5817 10 16 10C20.4183 10 24 13.5817 24 18Z" fill="currentColor" opacity="0.2"/>
+                </svg>
+              </div>
+              <p class="testimonial__text">{{ block.settings.quote }}</p>
+              <div class="testimonial__author">
+                <div class="testimonial__author-info">
+                  <h4 class="testimonial__author-name">{{ block.settings.author_name }}</h4>
+                  {%- if block.settings.author_location != blank -%}
+                    <p class="testimonial__author-location">{{ block.settings.author_location }}</p>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials {
+    background: linear-gradient(135deg, rgba(244, 209, 209, 0.05) 0%, rgba(245, 230, 211, 0.05) 100%);
+  }
+
+  .testimonial {
+    padding: 2.5rem;
+    height: 100%;
+  }
+
+  .testimonial__quote {
+    color: var(--color-rose, #D4A5A5);
+    margin-bottom: 1.5rem;
+  }
+
+  .testimonial__text {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--color-charcoal, #2C2C2C);
+    margin-bottom: 2rem;
+    font-style: italic;
+  }
+
+  .testimonial__author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .testimonial__author-name {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0 0 0.25rem 0;
+  }
+
+  .testimonial__author-location {
+    font-size: 0.875rem;
+    color: rgba(44, 44, 44, 0.6);
+    margin: 0;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Love Stories"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "The perfect gift for my partner! The packaging was beautiful and the quality exceeded my expectations."
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Author Name",
+          "default": "Sarah M."
+        },
+        {
+          "type": "text",
+          "id": "author_location",
+          "label": "Author Location",
+          "default": "New York, NY"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The perfect gift for my partner! The packaging was beautiful and the quality exceeded my expectations.",
+            "author_name": "Sarah M.",
+            "author_location": "New York, NY"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Made our Valentine's Day extra special. Fast shipping and amazing customer service!",
+            "author_name": "Michael R.",
+            "author_location": "Los Angeles, CA"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I've ordered multiple times and every gift has been perfect. Highly recommend!",
+            "author_name": "Emily T.",
+            "author_location": "Chicago, IL"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

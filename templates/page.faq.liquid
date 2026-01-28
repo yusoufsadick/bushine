@@ -1,0 +1,185 @@
+{%- comment -%}
+  FAQ Page Template
+{%- endcomment -%}
+
+<div class="page-faq">
+  <div class="page-faq__hero">
+    <div class="container">
+      <h1 class="page-faq__title">{{ page.title }}</h1>
+      <p class="page-faq__subtitle">Find answers to commonly asked questions</p>
+    </div>
+  </div>
+
+  <div class="page-faq__content container container--narrow">
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-item__question" type="button">
+          <span>What is your shipping policy?</span>
+          <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="faq-item__answer">
+          <p>We offer free standard shipping on orders over $50. Express shipping options are available at checkout. Orders typically ship within 1-2 business days.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-item__question" type="button">
+          <span>Can I personalize my gift?</span>
+          <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="faq-item__answer">
+          <p>Yes! Many of our products can be personalized with custom text or messages. Look for the "Personalized Message" option when adding items to your cart.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-item__question" type="button">
+          <span>What is your return policy?</span>
+          <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 20 20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="faq-item__answer">
+          <p>We offer a 30-day return policy on all unused items in their original packaging. Personalized items are final sale unless there's a defect.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-item__question" type="button">
+          <span>Do you offer gift wrapping?</span>
+          <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="faq-item__answer">
+          <p>Yes! Premium gift wrapping is available for $5.00 per item. You can add this option during checkout.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-item__question" type="button">
+          <span>How do I track my order?</span>
+          <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="faq-item__answer">
+          <p>Once your order ships, you'll receive a tracking number via email. You can also track your order on our Track Order page using your order number.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-item__question" type="button">
+          <span>What payment methods do you accept?</span>
+          <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="faq-item__answer">
+          <p>We accept all major credit cards, PayPal, Apple Pay, and Google Pay. All payments are processed securely.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .page-faq__hero {
+    background: linear-gradient(135deg, rgba(232, 180, 184, 0.1) 0%, rgba(212, 165, 165, 0.1) 100%);
+    padding: 4rem 0;
+    text-align: center;
+  }
+
+  .page-faq__title {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 1rem;
+  }
+
+  .page-faq__subtitle {
+    font-size: 1.25rem;
+    color: rgba(44, 44, 44, 0.7);
+  }
+
+  .page-faq__content {
+    padding: 4rem 0;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .faq-item {
+    border: 1px solid rgba(44, 44, 44, 0.1);
+    border-radius: var(--radius-lg, 12px);
+    overflow: hidden;
+  }
+
+  .faq-item__question {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    background: var(--color-white, #FFFFFF);
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 1.125rem;
+    font-weight: 600;
+    transition: background 0.2s ease;
+  }
+
+  .faq-item__question:hover {
+    background: rgba(244, 209, 209, 0.1);
+  }
+
+  .faq-item__icon {
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .faq-item.is-open .faq-item__icon {
+    transform: rotate(180deg);
+  }
+
+  .faq-item__answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .faq-item.is-open .faq-item__answer {
+    max-height: 500px;
+  }
+
+  .faq-item__answer p {
+    padding: 0 1.5rem 1.5rem;
+    margin: 0;
+    line-height: 1.8;
+    color: rgba(44, 44, 44, 0.7);
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.faq-item__question').forEach(question => {
+    question.addEventListener('click', function() {
+      const faqItem = this.closest('.faq-item');
+      const isOpen = faqItem.classList.contains('is-open');
+      
+      document.querySelectorAll('.faq-item').forEach(item => {
+        item.classList.remove('is-open');
+      });
+      
+      if (!isOpen) {
+        faqItem.classList.add('is-open');
+      }
+    });
+  });
+</script>

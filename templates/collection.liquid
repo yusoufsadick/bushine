@@ -1,0 +1,226 @@
+{%- comment -%}
+  Collection Page Template
+{%- endcomment -%}
+
+<div class="collection-page">
+  <div class="collection-page__header">
+    <div class="container">
+      <h1 class="collection-page__title">{{ collection.title }}</h1>
+      {%- if collection.description != blank -%}
+        <div class="collection-page__description">{{ collection.description }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="collection-page__inner container">
+    <div class="collection-page__layout">
+      {%- comment -%} Filters Sidebar {%- endcomment -%}
+      <aside class="collection-page__filters">
+        <div class="filters">
+          <h2 class="filters__title">Filters</h2>
+          
+          {%- comment -%} Price Filter {%- endcomment -%}
+          <div class="filter-group">
+            <h3 class="filter-group__title">Price</h3>
+            <div class="filter-group__options">
+              <label class="filter-option">
+                <input type="checkbox" name="price" value="0-50">
+                <span>$0 - $50</span>
+              </label>
+              <label class="filter-option">
+                <input type="checkbox" name="price" value="50-100">
+                <span>$50 - $100</span>
+              </label>
+              <label class="filter-option">
+                <input type="checkbox" name="price" value="100-200">
+                <span>$100 - $200</span>
+              </label>
+              <label class="filter-option">
+                <input type="checkbox" name="price" value="200+">
+                <span>$200+</span>
+              </label>
+            </div>
+          </div>
+
+          {%- comment -%} Availability Filter {%- endcomment -%}
+          <div class="filter-group">
+            <h3 class="filter-group__title">Availability</h3>
+            <div class="filter-group__options">
+              <label class="filter-option">
+                <input type="checkbox" name="availability" value="in-stock">
+                <span>In Stock</span>
+              </label>
+              <label class="filter-option">
+                <input type="checkbox" name="availability" value="pre-order">
+                <span>Pre-Order</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      {%- comment -%} Products Grid {%- endcomment -%}
+      <div class="collection-page__products">
+        <div class="collection-page__toolbar">
+          <div class="collection-page__count">
+            {{ collection.products_count }} {{ collection.products_count | pluralize: 'product', 'products' }}
+          </div>
+          <div class="collection-page__sort">
+            <label for="sort-by">Sort by:</label>
+            <select id="sort-by" class="sort-select">
+              <option value="manual">Featured</option>
+              <option value="price-ascending">Price: Low to High</option>
+              <option value="price-descending">Price: High to Low</option>
+              <option value="title-ascending">A-Z</option>
+              <option value="title-descending">Z-A</option>
+              <option value="created-ascending">Oldest</option>
+              <option value="created-descending">Newest</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="collection-page__grid grid grid--4" id="products-grid">
+          {%- for product in collection.products -%}
+            {% render 'product-card', product: product %}
+          {%- endfor -%}
+        </div>
+
+        {%- if collection.products.size == 0 -%}
+          <div class="collection-page__empty">
+            <p>No products found in this collection.</p>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .collection-page {
+    padding: 2rem 0 4rem;
+  }
+
+  .collection-page__header {
+    background: linear-gradient(135deg, rgba(244, 209, 209, 0.1) 0%, rgba(245, 230, 211, 0.1) 100%);
+    padding: 3rem 0;
+    margin-bottom: 3rem;
+  }
+
+  .collection-page__title {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 1rem;
+  }
+
+  .collection-page__description {
+    font-size: 1.125rem;
+    color: rgba(44, 44, 44, 0.7);
+    max-width: 800px;
+  }
+
+  .collection-page__layout {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 3rem;
+  }
+
+  .filters {
+    position: sticky;
+    top: 100px;
+  }
+
+  .filters__title {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .filter-group {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(44, 44, 44, 0.1);
+  }
+
+  .filter-group__title {
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .filter-group__options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .filter-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+  }
+
+  .filter-option input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+  }
+
+  .collection-page__toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(44, 44, 44, 0.1);
+  }
+
+  .collection-page__sort {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .sort-select {
+    padding: 0.5rem 1rem;
+    border: 2px solid rgba(44, 44, 44, 0.1);
+    border-radius: var(--radius-lg, 12px);
+    cursor: pointer;
+  }
+
+  .collection-page__empty {
+    text-align: center;
+    padding: 4rem 2rem;
+  }
+
+  @media (max-width: 1024px) {
+    .collection-page__layout {
+      grid-template-columns: 1fr;
+    }
+
+    .filters {
+      position: static;
+    }
+
+    .collection-page__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .collection-page__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .collection-page__toolbar {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .collection-page__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

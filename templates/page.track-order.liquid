@@ -1,0 +1,211 @@
+{%- comment -%}
+  Track Order Page Template
+{%- endcomment -%}
+
+<div class="page-track-order">
+  <div class="page-track-order__hero">
+    <div class="container">
+      <h1 class="page-track-order__title">{{ page.title }}</h1>
+      <p class="page-track-order__subtitle">Track your order status and delivery</p>
+    </div>
+  </div>
+
+  <div class="page-track-order__content container container--narrow">
+    <div class="track-order-form">
+      <h2>Enter Your Order Details</h2>
+      <form class="track-form" id="track-order-form">
+        <div class="track-form__group">
+          <label for="order-number">Order Number</label>
+          <input type="text" id="order-number" name="order_number" placeholder="e.g., #12345" required>
+        </div>
+
+        <div class="track-form__group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="email@example.com" required>
+        </div>
+
+        <button type="submit" class="btn btn--primary btn--large">Track Order</button>
+      </form>
+    </div>
+
+    <div class="order-status" id="order-status" style="display: none;">
+      <h2>Order Status</h2>
+      <div class="order-timeline">
+        <div class="timeline-item is-complete">
+          <div class="timeline-item__marker"></div>
+          <div class="timeline-item__content">
+            <h3>Order Placed</h3>
+            <p>Your order has been received</p>
+            <span class="timeline-item__date">January 15, 2024</span>
+          </div>
+        </div>
+
+        <div class="timeline-item is-complete">
+          <div class="timeline-item__marker"></div>
+          <div class="timeline-item__content">
+            <h3>Processing</h3>
+            <p>Your order is being prepared</p>
+            <span class="timeline-item__date">January 16, 2024</span>
+          </div>
+        </div>
+
+        <div class="timeline-item is-active">
+          <div class="timeline-item__marker"></div>
+          <div class="timeline-item__content">
+            <h3>Shipped</h3>
+            <p>Your order is on the way</p>
+            <span class="timeline-item__date">January 17, 2024</span>
+            <p class="tracking-number">Tracking: 1Z999AA10123456784</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-item__marker"></div>
+          <div class="timeline-item__content">
+            <h3>Delivered</h3>
+            <p>Expected delivery: January 20, 2024</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .page-track-order__hero {
+    background: linear-gradient(135deg, rgba(232, 180, 184, 0.1) 0%, rgba(212, 165, 165, 0.1) 100%);
+    padding: 4rem 0;
+    text-align: center;
+  }
+
+  .page-track-order__title {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 1rem;
+  }
+
+  .page-track-order__subtitle {
+    font-size: 1.25rem;
+    color: rgba(44, 44, 44, 0.7);
+  }
+
+  .page-track-order__content {
+    padding: 4rem 0;
+  }
+
+  .track-order-form {
+    margin-bottom: 4rem;
+    padding: 2rem;
+    background: rgba(244, 209, 209, 0.1);
+    border-radius: var(--radius-xl, 16px);
+  }
+
+  .track-order-form h2 {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .track-form__group {
+    margin-bottom: 1.5rem;
+  }
+
+  .track-form__group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .track-form__group input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid rgba(44, 44, 44, 0.1);
+    border-radius: var(--radius-lg, 12px);
+    font-family: inherit;
+  }
+
+  .track-form__group input:focus {
+    outline: none;
+    border-color: var(--color-rose, #D4A5A5);
+  }
+
+  .order-status h2 {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .order-timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .order-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0.5rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(44, 44, 44, 0.1);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-bottom: 3rem;
+    padding-left: 2rem;
+  }
+
+  .timeline-item__marker {
+    position: absolute;
+    left: -1.75rem;
+    top: 0.25rem;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--color-white, #FFFFFF);
+    border: 2px solid rgba(44, 44, 44, 0.3);
+    z-index: 1;
+  }
+
+  .timeline-item.is-complete .timeline-item__marker {
+    background: var(--color-rose, #D4A5A5);
+    border-color: var(--color-rose, #D4A5A5);
+  }
+
+  .timeline-item.is-active .timeline-item__marker {
+    background: var(--color-soft-red, #E8B4B8);
+    border-color: var(--color-soft-red, #E8B4B8);
+    box-shadow: 0 0 0 4px rgba(232, 180, 184, 0.2);
+  }
+
+  .timeline-item__content h3 {
+    font-size: 1.125rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-item__content p {
+    margin: 0 0 0.5rem 0;
+    color: rgba(44, 44, 44, 0.7);
+  }
+
+  .timeline-item__date {
+    font-size: 0.875rem;
+    color: rgba(44, 44, 44, 0.5);
+  }
+
+  .tracking-number {
+    font-weight: 600;
+    color: var(--color-rose, #D4A5A5);
+    margin-top: 0.5rem !important;
+  }
+</style>
+
+<script>
+  document.getElementById('track-order-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    // In a real implementation, this would make an API call to fetch order status
+    document.getElementById('order-status').style.display = 'block';
+    this.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+</script>

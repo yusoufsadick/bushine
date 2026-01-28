@@ -1,0 +1,192 @@
+{%- comment -%}
+  Hero Section - Premium Valentine Hero
+{%- endcomment -%}
+
+<section class="hero" id="hero-{{ section.id }}">
+  <div class="hero__background" style="background-image: url('{{ section.settings.background_image | default: 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=1920' | image_url: width: 1920 }}');">
+    <div class="hero__overlay"></div>
+  </div>
+  
+  <div class="hero__content container">
+    <div class="hero__text">
+      {%- if section.settings.headline != blank -%}
+        <h1 class="hero__headline">{{ section.settings.headline }}</h1>
+      {%- else -%}
+        <h1 class="hero__headline">Express Your Love This Valentine's</h1>
+      {%- endif -%}
+      
+      {%- if section.settings.copy != blank -%}
+        <p class="hero__copy">{{ section.settings.copy }}</p>
+      {%- else -%}
+        <p class="hero__copy">Discover our curated collection of premium gifts that speak from the heart</p>
+      {%- endif -%}
+      
+      <div class="hero__actions">
+        {%- if section.settings.cta_1_text != blank -%}
+          <a href="{{ section.settings.cta_1_link | default: routes.collections_url }}" class="btn btn--primary btn--large">
+            {{ section.settings.cta_1_text }}
+          </a>
+        {%- else -%}
+          <a href="{{ routes.collections_url }}" class="btn btn--primary btn--large">Shop Gifts</a>
+        {%- endif -%}
+        
+        {%- if section.settings.cta_2_text != blank -%}
+          <a href="{{ section.settings.cta_2_link | default: routes.collections_url }}" class="btn btn--secondary btn--large">
+            {{ section.settings.cta_2_text }}
+          </a>
+        {%- else -%}
+          <a href="{{ routes.collections_url }}" class="btn btn--secondary btn--large">Shop for Her</a>
+        {%- endif -%}
+        
+        {%- if section.settings.cta_3_text != blank -%}
+          <a href="{{ section.settings.cta_3_link | default: routes.collections_url }}" class="btn btn--outline btn--large">
+            {{ section.settings.cta_3_text }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .hero__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(232, 180, 184, 0.85) 0%, rgba(212, 165, 165, 0.75) 100%);
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: var(--color-white, #FFFFFF);
+    padding: 4rem 2rem;
+  }
+
+  .hero__headline {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--color-white, #FFFFFF);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .hero__copy {
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
+    margin-bottom: 3rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  }
+
+  .hero__actions {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      min-height: 70vh;
+    }
+
+    .hero__actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .hero__actions .btn {
+      width: 100%;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Express Your Love This Valentine's"
+    },
+    {
+      "type": "textarea",
+      "id": "copy",
+      "label": "Copy",
+      "default": "Discover our curated collection of premium gifts that speak from the heart"
+    },
+    {
+      "type": "text",
+      "id": "cta_1_text",
+      "label": "CTA 1 Text",
+      "default": "Shop Gifts"
+    },
+    {
+      "type": "url",
+      "id": "cta_1_link",
+      "label": "CTA 1 Link"
+    },
+    {
+      "type": "text",
+      "id": "cta_2_text",
+      "label": "CTA 2 Text",
+      "default": "Shop for Her"
+    },
+    {
+      "type": "url",
+      "id": "cta_2_link",
+      "label": "CTA 2 Link"
+    },
+    {
+      "type": "text",
+      "id": "cta_3_text",
+      "label": "CTA 3 Text",
+      "default": "Shop for Him"
+    },
+    {
+      "type": "url",
+      "id": "cta_3_link",
+      "label": "CTA 3 Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero"
+    }
+  ]
+}
+{% endschema %}

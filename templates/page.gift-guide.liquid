@@ -1,0 +1,143 @@
+{%- comment -%}
+  Gift Guide Page Template
+{%- endcomment -%}
+
+<div class="page-gift-guide">
+  <div class="page-gift-guide__hero">
+    <div class="container">
+      <h1 class="page-gift-guide__title">{{ page.title }}</h1>
+      <p class="page-gift-guide__subtitle">Find the perfect gift for your loved one</p>
+    </div>
+  </div>
+
+  <div class="page-gift-guide__content container">
+    <div class="gift-guide__categories">
+      <div class="gift-guide__category">
+        <h2>For Her</h2>
+        <div class="gift-guide__grid grid grid--3">
+          {%- assign her_collection = collections['for-her'] | default: collections.all -%}
+          {%- for product in her_collection.products limit: 6 -%}
+            {% render 'product-card', product: product %}
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <div class="gift-guide__category">
+        <h2>For Him</h2>
+        <div class="gift-guide__grid grid grid--3">
+          {%- assign him_collection = collections['for-him'] | default: collections.all -%}
+          {%- for product in him_collection.products limit: 6 -%}
+            {% render 'product-card', product: product %}
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <div class="gift-guide__category">
+        <h2>Gift Bundles</h2>
+        <div class="gift-guide__grid grid grid--3">
+          {%- assign bundles_collection = collections['gift-bundles'] | default: collections.all -%}
+          {%- for product in bundles_collection.products limit: 6 -%}
+            {% render 'product-card', product: product %}
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <div class="gift-guide__category">
+        <h2>Personalized Gifts</h2>
+        <div class="gift-guide__grid grid grid--3">
+          {%- assign personalized_collection = collections['personalized'] | default: collections.all -%}
+          {%- for product in personalized_collection.products limit: 6 -%}
+            {% render 'product-card', product: product %}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+
+    <div class="gift-guide__tips">
+      <h2>Gift Giving Tips</h2>
+      <div class="gift-guide__tips-grid grid grid--2">
+        <div class="tip-card">
+          <h3>Consider Their Interests</h3>
+          <p>Think about what they love - hobbies, favorite colors, or things they've mentioned wanting.</p>
+        </div>
+        <div class="tip-card">
+          <h3>Add a Personal Touch</h3>
+          <p>Personalized gifts show you put thought into it. Add a custom message or engraving.</p>
+        </div>
+        <div class="tip-card">
+          <h3>Quality Over Quantity</h3>
+          <p>One thoughtful, high-quality gift means more than many smaller items.</p>
+        </div>
+        <div class="tip-card">
+          <h3>Presentation Matters</h3>
+          <p>Don't forget to add premium gift wrapping - it makes the gift even more special!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .page-gift-guide__hero {
+    background: linear-gradient(135deg, rgba(232, 180, 184, 0.1) 0%, rgba(212, 165, 165, 0.1) 100%);
+    padding: 4rem 0;
+    text-align: center;
+  }
+
+  .page-gift-guide__title {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 1rem;
+  }
+
+  .page-gift-guide__subtitle {
+    font-size: 1.25rem;
+    color: rgba(44, 44, 44, 0.7);
+  }
+
+  .page-gift-guide__content {
+    padding: 4rem 0;
+  }
+
+  .gift-guide__category {
+    margin-bottom: 4rem;
+  }
+
+  .gift-guide__category h2 {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .gift-guide__tips {
+    margin-top: 4rem;
+    padding-top: 4rem;
+    border-top: 1px solid rgba(44, 44, 44, 0.1);
+  }
+
+  .gift-guide__tips h2 {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .tip-card {
+    padding: 2rem;
+    background: rgba(244, 209, 209, 0.1);
+    border-radius: var(--radius-lg, 12px);
+  }
+
+  .tip-card h3 {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .tip-card p {
+    margin: 0;
+    line-height: 1.8;
+    color: rgba(44, 44, 44, 0.7);
+  }
+</style>

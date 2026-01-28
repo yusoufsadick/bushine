@@ -1,0 +1,118 @@
+{%- comment -%}
+  About Us Page Template
+{%- endcomment -%}
+
+<div class="page-about">
+  <div class="page-about__hero">
+    <div class="container">
+      <h1 class="page-about__title">{{ page.title }}</h1>
+    </div>
+  </div>
+
+  <div class="page-about__content container container--narrow">
+    <div class="page-content">
+      {{ page.content }}
+    </div>
+
+    {%- comment -%} Brand Story Section {%- endcomment -%}
+    <div class="page-about__story">
+      <div class="page-about__story-content">
+        <h2>Our Story</h2>
+        <p>At RASHINE, we believe that every moment of love deserves to be celebrated with something special. Founded with a passion for creating meaningful connections, we curate premium Valentine's gifts that speak from the heart.</p>
+        <p>Our journey began with a simple mission: to help people express their love through beautifully crafted gifts that go beyond the ordinary. Each product in our collection is carefully selected for its quality, beauty, and ability to create lasting memories.</p>
+      </div>
+      <div class="page-about__story-image">
+        <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=800" alt="Our Story" loading="lazy">
+      </div>
+    </div>
+
+    {%- comment -%} Values Section {%- endcomment -%}
+    <div class="page-about__values">
+      <h2>Our Values</h2>
+      <div class="page-about__values-grid grid grid--3">
+        <div class="value-card">
+          <h3>Quality First</h3>
+          <p>We source only the finest products to ensure every gift meets our high standards of excellence.</p>
+        </div>
+        <div class="value-card">
+          <h3>Love & Care</h3>
+          <p>Every order is handled with love and attention to detail, from selection to packaging.</p>
+        </div>
+        <div class="value-card">
+          <h3>Customer Happiness</h3>
+          <p>Your satisfaction is our priority. We're here to make your gift-giving experience perfect.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .page-about__hero {
+    background: linear-gradient(135deg, rgba(232, 180, 184, 0.1) 0%, rgba(212, 165, 165, 0.1) 100%);
+    padding: 4rem 0;
+    text-align: center;
+  }
+
+  .page-about__title {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .page-about__content {
+    padding: 4rem 0;
+  }
+
+  .page-content {
+    margin-bottom: 4rem;
+    line-height: 1.8;
+  }
+
+  .page-about__story {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 4rem;
+    align-items: center;
+  }
+
+  .page-about__story-content h2 {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .page-about__story-content p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+  }
+
+  .page-about__story-image img {
+    width: 100%;
+    border-radius: var(--radius-xl, 16px);
+  }
+
+  .page-about__values h2 {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .value-card {
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .value-card h3 {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .page-about__story {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
