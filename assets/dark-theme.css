@@ -1,0 +1,447 @@
+/* ===============================================
+   RASHINE - Dark SaaS Valentine Theme
+   Dark Mode Design System
+   =============================================== */
+
+/* ===== Dark Mode Color Variables ===== */
+:root {
+  /* Backgrounds */
+  --dark-bg-primary: #0a0a0a;
+  --dark-bg-secondary: #1a1a1a;
+  --dark-bg-tertiary: #252525;
+  --dark-bg-card: rgba(26, 26, 26, 0.8);
+  
+  /* Accents - Neon Valentine */
+  --neon-pink: #FF1493;
+  --neon-rose: #FF69B4;
+  --neon-soft-red: #FF6B9D;
+  --neon-pink-glow: rgba(255, 20, 147, 0.5);
+  --neon-rose-glow: rgba(255, 105, 180, 0.5);
+  
+  /* Text */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.8);
+  --text-tertiary: rgba(255, 255, 255, 0.6);
+  --text-accent: #FF69B4;
+  
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-hover: rgba(255, 255, 255, 0.1);
+  
+  /* Gradients */
+  --gradient-dark-pink: linear-gradient(135deg, #0a0a0a 0%, #FF1493 100%);
+  --gradient-black-rose: linear-gradient(135deg, #000000 0%, #FF69B4 100%);
+  --gradient-pink-rose: linear-gradient(135deg, #FF1493 0%, #FF69B4 100%);
+  --gradient-text: linear-gradient(135deg, #ffffff 0%, #FF69B4 100%);
+  
+  /* Shadows & Glows */
+  --glow-pink: 0 0 20px rgba(255, 20, 147, 0.5);
+  --glow-rose: 0 0 20px rgba(255, 105, 180, 0.5);
+  --glow-strong: 0 0 40px rgba(255, 20, 147, 0.8);
+  --shadow-dark: 0 10px 40px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 10px 40px rgba(255, 20, 147, 0.3);
+}
+
+/* ===== Base Dark Mode Styles ===== */
+body.dark-mode,
+.dark-mode {
+  background-color: var(--dark-bg-primary);
+  color: var(--text-primary);
+}
+
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode h5,
+.dark-mode h6 {
+  color: var(--text-primary);
+}
+
+.dark-mode p {
+  color: var(--text-secondary);
+}
+
+/* ===== Glassmorphism Utilities ===== */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  background: var(--glass-hover);
+  border-color: rgba(255, 105, 180, 0.3);
+  transform: translateY(-4px);
+  box-shadow: var(--glow-rose);
+}
+
+.glass-header {
+  background: rgba(10, 10, 10, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid transparent;
+  background-image: linear-gradient(to bottom, transparent, rgba(255, 20, 147, 0.1));
+}
+
+/* ===== Gradient Utilities ===== */
+.gradient-dark-pink {
+  background: var(--gradient-dark-pink);
+}
+
+.gradient-black-rose {
+  background: var(--gradient-black-rose);
+}
+
+.gradient-pink-rose {
+  background: var(--gradient-pink-rose);
+}
+
+.gradient-text {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-border {
+  position: relative;
+  border: 1px solid transparent;
+  background: var(--dark-bg-secondary);
+  background-clip: padding-box;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--gradient-pink-rose);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+}
+
+/* ===== Glow Effects ===== */
+.glow-pink {
+  box-shadow: var(--glow-pink);
+}
+
+.glow-rose {
+  box-shadow: var(--glow-rose);
+}
+
+.glow-strong {
+  box-shadow: var(--glow-strong);
+}
+
+.text-glow-pink {
+  text-shadow: 0 0 10px rgba(255, 20, 147, 0.8);
+}
+
+.text-glow-rose {
+  text-shadow: 0 0 10px rgba(255, 105, 180, 0.8);
+}
+
+.neon-border {
+  border: 1px solid var(--neon-pink);
+  box-shadow: 0 0 10px var(--neon-pink-glow), inset 0 0 10px var(--neon-pink-glow);
+}
+
+/* ===== Neon Badges ===== */
+.badge-neon {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius: 20px;
+  background: var(--gradient-pink-rose);
+  color: var(--text-primary);
+  box-shadow: var(--glow-pink);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.badge-hot {
+  background: linear-gradient(135deg, #FF1493 0%, #FF0066 100%);
+  box-shadow: 0 0 20px rgba(255, 20, 147, 0.8);
+}
+
+.badge-limited {
+  background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%);
+  box-shadow: 0 0 20px rgba(255, 105, 180, 0.8);
+}
+
+.badge-valentine {
+  background: var(--gradient-pink-rose);
+  box-shadow: var(--glow-rose);
+}
+
+/* ===== Dark Buttons ===== */
+.btn-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-dark-primary {
+  background: var(--gradient-pink-rose);
+  color: var(--text-primary);
+  box-shadow: var(--glow-pink);
+}
+
+.btn-dark-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--glow-strong);
+  filter: brightness(1.1);
+}
+
+.btn-dark-secondary {
+  background: transparent;
+  color: var(--neon-pink);
+  border: 2px solid var(--neon-pink);
+  box-shadow: 0 0 10px var(--neon-pink-glow);
+}
+
+.btn-dark-secondary:hover {
+  background: var(--neon-pink);
+  color: var(--text-primary);
+  box-shadow: var(--glow-strong);
+}
+
+.btn-dark-outline {
+  background: transparent;
+  color: var(--text-primary);
+  border: 2px solid var(--glass-border);
+}
+
+.btn-dark-outline:hover {
+  border-color: var(--neon-rose);
+  box-shadow: var(--glow-rose);
+  color: var(--neon-rose);
+}
+
+/* ===== Animations ===== */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 20, 147, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 20, 147, 0.8);
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 0.8;
+    filter: brightness(1.2);
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 5s ease infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+/* ===== Dark Cards ===== */
+.card-dark {
+  background: var(--dark-bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.card-dark:hover {
+  border-color: rgba(255, 105, 180, 0.4);
+  box-shadow: var(--glow-rose);
+  transform: translateY(-8px);
+}
+
+/* ===== Image Overlays ===== */
+.image-overlay-dark {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-overlay-dark::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(10, 10, 10, 0.7) 0%, rgba(10, 10, 10, 0.3) 50%, rgba(10, 10, 10, 0.9) 100%);
+  pointer-events: none;
+}
+
+.image-overlay-gradient {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-overlay-gradient::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(10, 10, 10, 0.8) 0%, rgba(255, 20, 147, 0.3) 100%);
+  pointer-events: none;
+}
+
+/* ===== Scroll Indicator ===== */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 50px;
+  border: 2px solid var(--neon-pink);
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+  animation: scroll-bounce 2s infinite;
+  cursor: pointer;
+}
+
+.scroll-indicator::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--neon-pink);
+  border-radius: 50%;
+  box-shadow: var(--glow-pink);
+  animation: scroll-dot 2s infinite;
+}
+
+@keyframes scroll-bounce {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(10px);
+  }
+}
+
+@keyframes scroll-dot {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+}
+
+/* ===== Particles Effect ===== */
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--neon-pink);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--neon-pink-glow);
+  animation: particle-float 10s infinite;
+}
+
+@keyframes particle-float {
+  0% {
+    transform: translateY(100vh) translateX(0) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(100px) scale(1);
+    opacity: 0;
+  }
+}
+
+/* ===== Responsive Dark Mode ===== */
+@media (max-width: 768px) {
+  .glass-card {
+    padding: 1.5rem;
+  }
+  
+  .btn-dark {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.9375rem;
+  }
+}

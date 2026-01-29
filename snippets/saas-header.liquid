@@ -1,0 +1,450 @@
+{%- comment -%}
+  SaaS-Style Dark Header with Glassmorphism
+{%- endcomment -%}
+
+<header class="saas-header glass-header" role="banner" id="saas-header">
+  <div class="saas-header__inner container">
+    <div class="saas-header__left">
+      {%- comment -%} Logo {%- endcomment -%}
+      <div class="saas-header__logo">
+        <a href="{{ routes.root_url }}" class="logo logo--glow" aria-label="{{ shop.name }}">
+          {%- if settings.logo != blank -%}
+            <img src="{{ settings.logo | image_url: width: 200 }}" alt="{{ shop.name }}" loading="eager" width="{{ settings.logo.width }}" height="{{ settings.logo.height }}">
+          {%- else -%}
+            <span class="logo__text">{{ shop.name }}</span>
+          {%- endif -%}
+        </a>
+      </div>
+
+      {%- comment -%} Desktop Navigation {%- endcomment -%}
+      <nav class="saas-header__nav" role="navigation" aria-label="Main navigation">
+        <ul class="nav nav--desktop">
+          {%- for link in linklists.main-menu.links -%}
+            <li class="nav__item {% if link.links != blank %}dropdown{% endif %}">
+              <a href="{{ link.url }}" class="nav__link nav__link--glow {% if link.links != blank %}dropdown-trigger{% endif %}">
+                {{ link.title }}
+                {%- if link.links != blank -%}
+                  <svg class="icon icon-chevron-down" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                {%- endif -%}
+              </a>
+              
+              {%- if link.links != blank -%}
+                <div class="dropdown-menu glass-card">
+                  <ul class="dropdown-menu__list">
+                    {%- for childlink in link.links -%}
+                      <li class="dropdown-menu__item">
+                        <a href="{{ childlink.url }}" class="dropdown-menu__link">{{ childlink.title }}</a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    </div>
+
+    <div class="saas-header__right">
+      {%- comment -%} Search {%- endcomment -%}
+      <div class="saas-header__search">
+        <button type="button" class="search-toggle neon-border" aria-label="Search">
+          <svg class="icon icon-search" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 17C13.4183 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M19 19L14.65 14.65" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        
+        <div class="search-form glass-card">
+          <form action="{{ routes.search_url }}" method="get" role="search">
+            <input type="search" name="q" class="search-input" placeholder="Search for gifts..." value="{{ search.terms | escape }}" autocomplete="off">
+            <button type="submit" class="search-submit" aria-label="Submit search">
+              <svg class="icon icon-search" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 17C13.4183 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M19 19L14.65 14.65" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button type="button" class="search-close" aria-label="Close search">
+              <svg class="icon icon-close" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      {%- comment -%} Account {%- endcomment -%}
+      <div class="saas-header__account">
+        <a href="{{ routes.account_login_url }}" class="saas-header__icon" aria-label="Account">
+          <svg class="icon icon-user" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 10C12.7614 10 15 7.76142 15 5C15 2.23858 12.7614 0 10 0C7.23858 0 5 2.23858 5 5C5 7.76142 7.23858 10 10 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M0 20C0 15.5817 4.47715 12 10 12C15.5228 12 20 15.5817 20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      {%- comment -%} Cart {%- endcomment -%}
+      <div class="saas-header__cart">
+        <button type="button" class="cart-toggle saas-header__icon" aria-label="Shopping cart">
+          <svg class="icon icon-cart" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1H4.27273L6.46545 12.4773C6.54018 12.8719 6.7452 13.236 7.04436 13.5057C7.34351 13.7754 7.71784 13.9352 8.10909 13.9545H16.2727C16.664 13.9352 17.0383 13.7754 17.3375 13.5057C17.6366 13.236 17.8416 12.8719 17.9164 12.4773L19 5.81818H5.09091" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M7.72727 19C8.27956 19 8.72727 18.5523 8.72727 18C8.72727 17.4477 8.27956 17 7.72727 17C7.17498 17 6.72727 17.4477 6.72727 18C6.72727 18.5523 7.17498 19 7.72727 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M17 19C17.5523 19 18 18.5523 18 18C18 17.4477 17.5523 17 17 17C16.4477 17 16 17.4477 16 18C16 18.5523 16.4477 19 17 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="cart-count badge-neon" style="display: none;">0</span>
+        </button>
+      </div>
+
+      {%- comment -%} Mobile Menu Toggle {%- endcomment -%}
+      <button type="button" class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+        <span class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  {%- comment -%} Mobile Menu {%- endcomment -%}
+  <nav class="mobile-menu glass-card" role="navigation" aria-label="Mobile navigation">
+    <div class="mobile-menu__inner">
+      <ul class="nav nav--mobile">
+        {%- for link in linklists.main-menu.links -%}
+          <li class="nav__item">
+            <a href="{{ link.url }}" class="nav__link">{{ link.title }}</a>
+            {%- if link.links != blank -%}
+              <ul class="nav__submenu">
+                {%- for childlink in link.links -%}
+                  <li class="nav__item">
+                    <a href="{{ childlink.url }}" class="nav__link">{{ childlink.title }}</a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </nav>
+
+  {%- comment -%} Menu Overlay {%- endcomment -%}
+  <div class="menu-overlay"></div>
+</header>
+
+<style>
+  .saas-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 1.5rem 0;
+    transition: all 0.3s ease;
+  }
+
+  .saas-header--scrolled {
+    padding: 1rem 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .saas-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .saas-header__left {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    flex: 1;
+  }
+
+  .logo--glow {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary, #ffffff);
+    text-decoration: none;
+    text-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+    transition: all 0.3s ease;
+  }
+
+  .logo--glow:hover {
+    text-shadow: 0 0 20px rgba(255, 20, 147, 0.8);
+    filter: brightness(1.2);
+  }
+
+  .logo img {
+    max-height: 50px;
+    width: auto;
+    filter: drop-shadow(0 0 10px rgba(255, 20, 147, 0.5));
+  }
+
+  .nav--desktop {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .nav__link--glow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.8));
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .nav__link--glow:hover {
+    color: var(--neon-pink, #FF1493);
+    text-shadow: 0 0 10px rgba(255, 20, 147, 0.8);
+  }
+
+  .nav__link--glow::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 1rem;
+    right: 1rem;
+    height: 2px;
+    background: var(--gradient-pink-rose, linear-gradient(135deg, #FF1493 0%, #FF69B4 100%));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+  }
+
+  .nav__link--glow:hover::after {
+    transform: scaleX(1);
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1001;
+    margin-top: 1rem;
+  }
+
+  .dropdown.is-open .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .dropdown-menu__list {
+    padding: 0.5rem 0;
+  }
+
+  .dropdown-menu__link {
+    display: block;
+    padding: 0.75rem 1.5rem;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.8));
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .dropdown-menu__link:hover {
+    background: rgba(255, 20, 147, 0.1);
+    color: var(--neon-pink, #FF1493);
+  }
+
+  .saas-header__right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .saas-header__icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.8));
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border-radius: 12px;
+  }
+
+  .saas-header__icon:hover {
+    color: var(--neon-pink, #FF1493);
+    background: rgba(255, 20, 147, 0.1);
+    box-shadow: 0 0 15px rgba(255, 20, 147, 0.3);
+  }
+
+  .search-toggle {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--neon-pink, #FF1493);
+    border-radius: 12px;
+    color: var(--neon-pink, #FF1493);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 20, 147, 0.3);
+  }
+
+  .search-toggle:hover {
+    box-shadow: 0 0 20px rgba(255, 20, 147, 0.6);
+    transform: scale(1.05);
+  }
+
+  .search-form {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem;
+    z-index: 2000;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .search-form.is-active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .search-form form {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .search-input {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    font-size: 1.125rem;
+    background: rgba(26, 26, 26, 0.9);
+    border: 2px solid rgba(255, 20, 147, 0.3);
+    border-radius: 12px;
+    color: var(--text-primary, #ffffff);
+    box-shadow: 0 0 15px rgba(255, 20, 147, 0.2);
+  }
+
+  .search-input:focus {
+    outline: none;
+    border-color: var(--neon-pink, #FF1493);
+    box-shadow: 0 0 25px rgba(255, 20, 147, 0.5);
+  }
+
+  .mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.1));
+    border-radius: 12px;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--neon-pink, #FF1493);
+    transition: all 0.3s ease;
+    box-shadow: 0 0 5px rgba(255, 20, 147, 0.5);
+  }
+
+  .mobile-menu-toggle.is-active .hamburger span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+  }
+
+  .mobile-menu-toggle.is-active .hamburger span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-menu-toggle.is-active .hamburger span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: 320px;
+    height: 100vh;
+    z-index: 1500;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+  }
+
+  .mobile-menu.is-open {
+    transform: translateX(0);
+  }
+
+  .mobile-menu__inner {
+    padding: 2rem;
+  }
+
+  .nav--mobile .nav__link {
+    display: block;
+    padding: 1.25rem 0;
+    font-size: 1.125rem;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.8));
+  }
+
+  .menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1400;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .menu-overlay.is-active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  @media (max-width: 1024px) {
+    .saas-header__nav {
+      display: none;
+    }
+
+    .mobile-menu-toggle {
+      display: flex;
+    }
+  }
+</style>

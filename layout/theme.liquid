@@ -181,6 +181,7 @@
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'theme.css' | asset_url | stylesheet_tag }}
+    {{ 'dark-theme.css' | asset_url | stylesheet_tag }}
 
     {%- unless settings.type_body_font.system? -%}
       <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
@@ -200,7 +201,7 @@
     </script>
   </head>
 
-  <body class="gradient">
+  <body class="gradient dark-mode">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
     </a>
@@ -209,7 +210,7 @@
       {%- render 'cart-notification', color_scheme: settings.cart_notification_color_scheme, desktop_menu_type: section.settings.menu_type_desktop -%}
     {%- endif -%}
 
-    {% sections 'header-group' %}
+    {% render 'saas-header' %}
 
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       {{ content_for_layout }}
@@ -250,5 +251,6 @@
     {%- endif -%}
 
     <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'carousel.js' | asset_url }}" defer="defer"></script>
   </body>
 </html>

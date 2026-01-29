@@ -1,0 +1,235 @@
+{%- comment -%}
+  Dark SaaS Hero Section - Full Screen with Animated Gradients
+{%- endcomment -%}
+
+<section class="dark-hero" id="dark-hero-{{ section.id }}">
+  {%- comment -%} Background Image {%- endcomment -%}
+  <div class="dark-hero__background">
+    {%- if section.settings.background_image != blank -%}
+      <img src="{{ section.settings.background_image | image_url: width: 1920 }}" alt="Hero background" loading="eager" class="dark-hero__bg-image">
+    {%- else -%}
+      <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=1920&q=80" alt="Romantic couple" loading="eager" class="dark-hero__bg-image">
+    {%- endif -%}
+    <div class="dark-hero__overlay image-overlay-gradient"></div>
+    <div class="dark-hero__gradient animate-gradient"></div>
+  </div>
+
+  {%- comment -%} Particles Effect {%- endcomment -%}
+  <div class="particles" id="particles-{{ section.id }}"></div>
+
+  {%- comment -%} Content {%- endcomment -%}
+  <div class="dark-hero__content container">
+    <div class="dark-hero__text animate-float">
+      {%- if section.settings.headline != blank -%}
+        <h1 class="dark-hero__headline gradient-text">{{ section.settings.headline }}</h1>
+      {%- else -%}
+        <h1 class="dark-hero__headline gradient-text">Express Your Love This Valentine's</h1>
+      {%- endif -%}
+      
+      {%- if section.settings.subheadline != blank -%}
+        <p class="dark-hero__subheadline">{{ section.settings.subheadline }}</p>
+      {%- else -%}
+        <p class="dark-hero__subheadline">Discover our curated collection of premium gifts that speak from the heart</p>
+      {%- endif -%}
+      
+      <div class="dark-hero__actions">
+        {%- if section.settings.cta_1_text != blank -%}
+          <a href="{{ section.settings.cta_1_link | default: routes.collections_url }}" class="btn-dark btn-dark-primary">
+            {{ section.settings.cta_1_text }}
+          </a>
+        {%- else -%}
+          <a href="{{ routes.collections_url }}" class="btn-dark btn-dark-primary">Shop Gifts</a>
+        {%- endif -%}
+        
+        {%- if section.settings.cta_2_text != blank -%}
+          <a href="{{ section.settings.cta_2_link | default: routes.collections_url }}" class="btn-dark btn-dark-secondary">
+            {{ section.settings.cta_2_text }}
+          </a>
+        {%- else -%}
+          <a href="{{ routes.collections_url }}" class="btn-dark btn-dark-secondary">Shop for Her</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} Scroll Indicator {%- endcomment -%}
+  <div class="scroll-indicator" onclick="window.scrollTo({top: window.innerHeight, behavior: 'smooth'})"></div>
+</section>
+
+<style>
+  .dark-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--dark-bg-primary, #0a0a0a);
+  }
+
+  .dark-hero__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+  }
+
+  .dark-hero__bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.4;
+  }
+
+  .dark-hero__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+  }
+
+  .dark-hero__gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(10, 10, 10, 0.9) 0%, rgba(255, 20, 147, 0.3) 50%, rgba(10, 10, 10, 0.9) 100%);
+    background-size: 200% 200%;
+    z-index: 3;
+  }
+
+  .dark-hero__content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 4rem 2rem;
+    max-width: 1200px;
+  }
+
+  .dark-hero__headline {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    text-shadow: 0 0 30px rgba(255, 20, 147, 0.5);
+  }
+
+  .dark-hero__subheadline {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    margin-bottom: 3rem;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.8));
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+  }
+
+  .dark-hero__actions {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+    .dark-hero {
+      min-height: 90vh;
+    }
+
+    .dark-hero__actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .dark-hero__actions .btn-dark {
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  // Create particles effect
+  (function() {
+    const particlesContainer = document.getElementById('particles-{{ section.id }}');
+    if (!particlesContainer) return;
+
+    const particleCount = 20;
+    
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.animationDelay = Math.random() * 10 + 's';
+      particle.style.animationDuration = (Math.random() * 5 + 5) + 's';
+      particlesContainer.appendChild(particle);
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Dark Hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Express Your Love This Valentine's"
+    },
+    {
+      "type": "textarea",
+      "id": "subheadline",
+      "label": "Subheadline",
+      "default": "Discover our curated collection of premium gifts that speak from the heart"
+    },
+    {
+      "type": "text",
+      "id": "cta_1_text",
+      "label": "Primary CTA Text",
+      "default": "Shop Gifts"
+    },
+    {
+      "type": "url",
+      "id": "cta_1_link",
+      "label": "Primary CTA Link"
+    },
+    {
+      "type": "text",
+      "id": "cta_2_text",
+      "label": "Secondary CTA Text",
+      "default": "Shop for Her"
+    },
+    {
+      "type": "url",
+      "id": "cta_2_link",
+      "label": "Secondary CTA Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Dark Hero"
+    }
+  ]
+}
+{% endschema %}
