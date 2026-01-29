@@ -80,16 +80,27 @@
         </div>
 
         <div class="collection-page__grid grid grid--4" id="products-grid">
-          {%- for product in collection.products -%}
-            {% render 'product-card', product: product %}
-          {%- endfor -%}
+          {%- if collection.products.size > 0 -%}
+            {%- for product in collection.products -%}
+              {% render 'product-card', product: product %}
+            {%- endfor -%}
+          {%- else -%}
+            {%- comment -%} Beautiful empty state {%- endcomment -%}
+            <div class="collection-page__empty glass-card">
+              <div class="empty-state">
+                <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="empty-state__icon">
+                  <circle cx="60" cy="60" r="50" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+                  <path d="M40 50L50 60L80 30" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M30 70H90" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+                  <path d="M30 80H90" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+                </svg>
+                <h2 class="empty-state__title gradient-text">No Products Yet</h2>
+                <p class="empty-state__text">This collection is waiting for amazing products. Check back soon!</p>
+                <a href="{{ routes.collections_url }}" class="btn-dark btn-dark-primary">Browse All Collections</a>
+              </div>
+            </div>
+          {%- endif -%}
         </div>
-
-        {%- if collection.products.size == 0 -%}
-          <div class="collection-page__empty">
-            <p>No products found in this collection.</p>
-          </div>
-        {%- endif -%}
       </div>
     </div>
   </div>
@@ -98,12 +109,22 @@
 <style>
   .collection-page {
     padding: 2rem 0 4rem;
+    background: var(--dark-bg-primary, #0a0a0a);
+    min-height: 60vh;
   }
 
   .collection-page__header {
-    background: linear-gradient(135deg, rgba(244, 209, 209, 0.1) 0%, rgba(245, 230, 211, 0.1) 100%);
-    padding: 3rem 0;
+    background: linear-gradient(135deg, rgba(255, 20, 147, 0.1) 0%, rgba(255, 105, 180, 0.1) 100%);
+    padding: 4rem 0;
     margin-bottom: 3rem;
+  }
+  
+  .collection-page__title {
+    color: var(--text-primary, #ffffff);
+  }
+  
+  .collection-page__description {
+    color: var(--text-secondary, rgba(255, 255, 255, 0.8));
   }
 
   .collection-page__title {
@@ -127,6 +148,26 @@
   .filters {
     position: sticky;
     top: 100px;
+    background: var(--dark-bg-secondary, #1a1a1a);
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.1));
+  }
+  
+  .filters__title {
+    color: var(--text-primary, #ffffff);
+  }
+  
+  .filter-group__title {
+    color: var(--text-primary, #ffffff);
+  }
+  
+  .filter-option {
+    color: var(--text-secondary, rgba(255, 255, 255, 0.8));
+  }
+  
+  .filter-option:hover {
+    color: var(--neon-pink, #FF1493);
   }
 
   .filters__title {
@@ -171,7 +212,22 @@
     align-items: center;
     margin-bottom: 2rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(44, 44, 44, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .collection-page__count {
+    color: var(--text-secondary, rgba(255, 255, 255, 0.8));
+  }
+  
+  .sort-select {
+    background: var(--dark-bg-secondary, #1a1a1a);
+    color: var(--text-primary, #ffffff);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .sort-select:focus {
+    border-color: var(--neon-pink, #FF1493);
+    box-shadow: 0 0 10px rgba(255, 20, 147, 0.3);
   }
 
   .collection-page__sort {
@@ -188,8 +244,35 @@
   }
 
   .collection-page__empty {
+    grid-column: 1 / -1;
     text-align: center;
-    padding: 4rem 2rem;
+    padding: 6rem 2rem;
+  }
+  
+  .empty-state {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .empty-state__icon {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 2rem;
+    color: var(--neon-pink, #FF1493);
+    opacity: 0.6;
+  }
+  
+  .empty-state__title {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .empty-state__text {
+    font-size: 1.125rem;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.8));
+    margin-bottom: 2rem;
+    line-height: 1.6;
   }
 
   @media (max-width: 1024px) {

@@ -50,6 +50,22 @@ body.dark-mode,
   color: var(--text-primary);
 }
 
+body.dark-mode .section {
+  margin: 0;
+}
+
+body.dark-mode .container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+@media (max-width: 768px) {
+  body.dark-mode .container {
+    padding: 0 1.5rem;
+  }
+}
+
 .dark-mode h1,
 .dark-mode h2,
 .dark-mode h3,

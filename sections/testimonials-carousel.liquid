@@ -63,6 +63,12 @@
   .testimonials-carousel {
     background: var(--dark-bg-primary, #0a0a0a);
     padding: 6rem 0;
+    margin: 0;
+  }
+  
+  .testimonials-carousel.section {
+    margin: 0;
+    padding: 6rem 0;
   }
 
   .testimonial-card-dark {
@@ -147,6 +153,11 @@
     margin: 0;
   }
 
+  .carousel-container {
+    margin: 0 -15px;
+    padding: 2rem 0;
+  }
+  
   .carousel-slide {
     flex: 0 0 100%;
     padding: 0 15px;
@@ -167,7 +178,7 @@
 
 {% schema %}
 {
-  "name": "Testimonials Carousel",
+  "name": "testimonials-carousel",
   "settings": [
     {
       "type": "text",

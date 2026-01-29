@@ -11,7 +11,7 @@
           <img src="{{ product.images[1] | image_url: width: 400 }}" alt="{{ product.title | escape }}" loading="lazy" class="product-card-dark__img product-card-dark__img--hover">
         {%- endif -%}
       {%- else -%}
-        <img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?w=400&q=80" alt="{{ product.title | escape }}" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?w=400&q=80" alt="{{ product.title | escape }}" loading="lazy" class="product-card-dark__img">
       {%- endif -%}
       
       {%- comment -%} Badges {%- endcomment -%}
@@ -84,6 +84,7 @@
     overflow: hidden;
     border-radius: 16px;
     margin-bottom: 1.5rem;
+    background: var(--dark-bg-tertiary, #252525);
   }
 
   .product-card-dark__img {
@@ -138,6 +139,14 @@
     border-color: rgba(255, 105, 180, 0.4);
     box-shadow: var(--glow-rose, 0 0 20px rgba(255, 105, 180, 0.5));
     transform: translateY(-8px);
+  }
+  
+  .product-card-dark__img {
+    transition: transform 0.5s ease, opacity 0.3s ease;
+  }
+  
+  .product-card-dark:hover .product-card-dark__img {
+    transform: scale(1.05);
   }
 
   .product-card-dark__form {

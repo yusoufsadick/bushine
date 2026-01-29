@@ -232,58 +232,67 @@
   // Initialize carousels on page load
   function initCarousels() {
     // Featured Products Carousel
-    const productsCarousel = document.querySelector('.featured-products-carousel');
+    const productsCarousel = document.querySelector('.featured-products-carousel.carousel-container');
     if (productsCarousel) {
-      new Carousel(productsCarousel, {
-        slidesPerView: 1,
-        spaceBetween: 20,
-        loop: true,
-        autoplay: true,
-        autoplayDelay: 4000,
-        navigation: true,
-        pagination: true,
-        breakpoints: {
-          768: { slidesPerView: 2 },
-          1024: { slidesPerView: 3 },
-          1280: { slidesPerView: 4 }
-        }
-      });
+      const slides = productsCarousel.querySelectorAll('.carousel-slide');
+      if (slides.length > 0) {
+        new Carousel(productsCarousel, {
+          slidesPerView: 1,
+          spaceBetween: 20,
+          loop: slides.length > 1,
+          autoplay: slides.length > 1,
+          autoplayDelay: 4000,
+          navigation: true,
+          pagination: true,
+          breakpoints: {
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+            1280: { slidesPerView: 4 }
+          }
+        });
+      }
     }
 
     // Bundles Slider
-    const bundlesSlider = document.querySelector('.valentine-bundles-slider');
+    const bundlesSlider = document.querySelector('.valentine-bundles-slider.carousel-container');
     if (bundlesSlider) {
-      new Carousel(bundlesSlider, {
-        slidesPerView: 1,
-        spaceBetween: 20,
-        loop: true,
-        autoplay: true,
-        autoplayDelay: 5000,
-        navigation: true,
-        pagination: true,
-        breakpoints: {
-          768: { slidesPerView: 2 },
-          1024: { slidesPerView: 3 }
-        }
-      });
+      const slides = bundlesSlider.querySelectorAll('.carousel-slide');
+      if (slides.length > 0) {
+        new Carousel(bundlesSlider, {
+          slidesPerView: 1,
+          spaceBetween: 20,
+          loop: slides.length > 1,
+          autoplay: slides.length > 1,
+          autoplayDelay: 5000,
+          navigation: true,
+          pagination: true,
+          breakpoints: {
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 }
+          }
+        });
+      }
     }
 
     // Testimonials Carousel
-    const testimonialsCarousel = document.querySelector('.testimonials-carousel');
+    const testimonialsCarousel = document.querySelector('.testimonials-carousel.carousel-container');
     if (testimonialsCarousel) {
-      new Carousel(testimonialsCarousel, {
-        slidesPerView: 1,
-        spaceBetween: 30,
-        loop: true,
-        autoplay: true,
-        autoplayDelay: 6000,
-        navigation: true,
-        pagination: true,
-        breakpoints: {
-          768: { slidesPerView: 2 },
-          1024: { slidesPerView: 3 }
-        }
-      });
+      const slides = testimonialsCarousel.querySelectorAll('.carousel-slide');
+      if (slides.length > 0) {
+        new Carousel(testimonialsCarousel, {
+          slidesPerView: 1,
+          spaceBetween: 30,
+          loop: slides.length > 1,
+          autoplay: slides.length > 1,
+          autoplayDelay: 6000,
+          navigation: true,
+          pagination: true,
+          breakpoints: {
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 }
+          }
+        });
+      }
     }
   }
 
