@@ -26,25 +26,6 @@
           <div class="bundle-card-dark glass-card">
             <a href="{{ product.url }}" class="bundle-card-dark__link">
 
-              <div class="bundle-card-dark__image">
-                {% if product.featured_image %}
-                  <img
-                    src="{{ product.featured_image | image_url: width: 900 }}"
-                    alt="{{ product.title | escape }}"
-                    loading="lazy">
-                {% else %}
-                  <img
-                    src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?w=900&q=80"
-                    alt="{{ product.title | escape }}"
-                    loading="lazy">
-                {% endif %}
-
-                {% if product.compare_at_price > product.price %}
-                  <span class="bundle-badge">
-                    Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%
-                  </span>
-                {% endif %}
-              </div>
 
               <div class="bundle-card-dark__content">
                 <h3 class="bundle-card-dark__title">{{ product.title }}</h3>
