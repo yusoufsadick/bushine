@@ -1,0 +1,323 @@
+{%- comment -%}
+  Featured Products Carousel - Dark SaaS Style
+{%- endcomment -%}
+
+{%- assign collection = collections[section.settings.collection] | default: collections.all -%}
+
+<section class="featured-products-carousel section" id="featured-products-{{ section.id }}">
+  <div class="container">
+    <div class="section__header">
+      <h2 class="section__title gradient-text">{{ section.settings.title | default: 'Featured Products' }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="section__subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="featured-products-carousel carousel-container">
+      <div class="carousel-track">
+        {%- if collection.products.size > 0 -%}
+          {%- for product in collection.products limit: section.settings.products_to_show -%}
+            <div class="carousel-slide">
+              {% render 'product-card', product: product %}
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          {%- comment -%} Beautiful fallback placeholder products {%- endcomment -%}
+          {%- assign placeholder_images = 'https://images.unsplash.com/photo-1511988617509-a57c8a288659?w=600&q=80,https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600&q=80,https://images.unsplash.com/photo-1606800054162-98608746b2c0?w=600&q=80,https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=600&q=80' | split: ',' -%}
+          {%- assign placeholder_titles = 'Romantic Rose Bouquet,Chocolate Gift Box,Personalized Jewelry,Valentine Gift Set' | split: ',' -%}
+          {%- for i in (1..4) -%}
+            <div class="carousel-slide">
+              <div class="product-card-dark glass-card">
+                <a href="{{ routes.collections_url }}" class="product-card-dark__link">
+                  <div class="product-card-dark__image">
+                    <img src="{{ placeholder_images[forloop.index0] }}" alt="{{ placeholder_titles[forloop.index0] }}" loading="lazy" class="product-card-dark__img">
+                    <div class="product-card-dark__badges">
+                      <span class="badge-neon badge-valentine">VALENTINE</span>
+                      {%- if forloop.index == 1 -%}
+                        <span class="badge-neon badge-hot">HOT</span>
+                      {%- endif -%}
+                    </div>
+                    <div class="product-card-dark__actions">
+                      <a href="{{ routes.collections_url }}" class="btn-dark btn-dark-primary">View Products</a>
+                    </div>
+                  </div>
+                  <div class="product-card-dark__content">
+                    <h3 class="product-card-dark__title">{{ placeholder_titles[forloop.index0] }}</h3>
+                    <div class="product-card-dark__rating">
+                      <div class="stars">
+                        {%- for j in (1..5) -%}
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="currentColor"/>
+                          </svg>
+                        {%- endfor -%}
+                      </div>
+                      <span class="rating-text">(4.8)</span>
+                    </div>
+                    <div class="product-card-dark__price">
+                      <span class="price--current">${{ 29 | plus: i | times: 10 }}.00</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .featured-products-carousel {
+    background: var(--dark-bg-primary, #0a0a0a);
+    padding: 6rem 0;
+  }
+
+  .section__header {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding: 0 1rem;
+  }
+
+  .section__title {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 1rem;
+  }
+
+  .section__subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary, rgba(255, 255, 255, 0.8));
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .carousel-container {
+    position: relative;
+    overflow: hidden;
+    padding: 2rem 0;
+    margin: 0 -10px;
+  }
+  
+  @media (min-width: 768px) {
+    .carousel-container {
+      margin: 0 -15px;
+    }
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+
+  .carousel-slide {
+    flex: 0 0 100%;
+    padding: 0 10px;
+  }
+
+  @media (min-width: 768px) {
+    .carousel-slide {
+      flex: 0 0 50%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .carousel-slide {
+      flex: 0 0 33.333%;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .carousel-slide {
+      flex: 0 0 25%;
+    }
+  }
+
+  .product-card-dark {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+  }
+
+  .product-card-dark__link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product-card-dark__image {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+    overflow: hidden;
+    border-radius: 16px;
+    margin-bottom: 1.5rem;
+  }
+
+  .product-card-dark__img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+  }
+
+  .product-card-dark__img--hover {
+    opacity: 0;
+  }
+
+  .product-card-dark:hover .product-card-dark__img:first-child {
+    opacity: 0;
+  }
+
+  .product-card-dark:hover .product-card-dark__img--hover {
+    opacity: 1;
+  }
+
+  .product-card-dark__badges {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 2;
+  }
+
+  .product-card-dark__actions {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 2;
+  }
+
+  .product-card-dark:hover .product-card-dark__actions {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .product-card-dark__form {
+    width: 100%;
+  }
+
+  .product-card-dark__form .btn-dark {
+    width: 100%;
+  }
+
+  .product-card-dark__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product-card-dark__title {
+    font-family: var(--font-heading, 'Playfair Display', serif);
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary, #ffffff);
+  }
+
+  .product-card-dark__rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .stars {
+    display: flex;
+    gap: 2px;
+    color: var(--neon-pink, #FF1493);
+  }
+
+  .rating-text {
+    font-size: 0.875rem;
+    color: var(--text-tertiary, rgba(255, 255, 255, 0.6));
+  }
+
+  .product-card-dark__price {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: auto;
+  }
+
+  .price--compare {
+    text-decoration: line-through;
+    color: var(--text-tertiary, rgba(255, 255, 255, 0.5));
+    font-size: 0.9375rem;
+  }
+
+  .price--current {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--neon-pink, #FF1493);
+    text-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+  }
+
+  .carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(26, 26, 26, 0.9);
+    border: 1px solid var(--neon-pink, #FF1493);
+    border-radius: 50%;
+    color: var(--neon-pink, #FF1493);
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(255, 20, 147, 0.3);
+  }
+
+  .carousel-nav:hover {
+    background: var(--neon-pink, #FF1493);
+    color: var(--text-primary, #ffffff);
+    box-shadow: 0 0 25px rgba(255, 20, 147, 0.6);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .carousel-nav--prev {
+    left: 1rem;
+  }
+
+  .carousel-nav--next {
+    right: 1rem;
+  }
+
+  .carousel-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+  }
+
+  .carousel-pagination-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .carousel-pagination-dot.is-active {
+    background: var(--neon-pink, #FF1493);
+    box-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+    transform: scale(1.2);
+  }
+</style>
