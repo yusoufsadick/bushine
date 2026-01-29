@@ -15,74 +15,53 @@
 
     <div class="featured-products-carousel carousel-container">
       <div class="carousel-track">
-        {%- for product in collection.products limit: section.settings.products_to_show -%}
-          <div class="carousel-slide">
-            <div class="product-card-dark glass-card">
-              <a href="{{ product.url }}" class="product-card-dark__link">
-                <div class="product-card-dark__image">
-                  {%- if product.featured_image -%}
-                    <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" loading="lazy" class="product-card-dark__img">
-                    {%- if product.images.size > 1 -%}
-                      <img src="{{ product.images[1] | image_url: width: 600 }}" alt="{{ product.title | escape }}" loading="lazy" class="product-card-dark__img product-card-dark__img--hover">
-                    {%- endif -%}
-                  {%- else -%}
-                    <img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?w=600&q=80" alt="{{ product.title | escape }}" loading="lazy">
-                  {%- endif -%}
-                  
-                  {%- comment -%} Badges {%- endcomment -%}
-                  <div class="product-card-dark__badges">
-                    {%- if product.compare_at_price > product.price -%}
-                      <span class="badge-neon badge-hot">HOT</span>
-                    {%- endif -%}
-                    {%- if product.tags contains 'limited' -%}
-                      <span class="badge-neon badge-limited">LIMITED</span>
-                    {%- endif -%}
-                    {%- if product.tags contains 'valentine' -%}
-                      <span class="badge-neon badge-valentine">VALENTINE</span>
-                    {%- endif -%}
-                  </div>
-
-                  {%- comment -%} Quick Add Button {%- endcomment -%}
-                  <div class="product-card-dark__actions">
-                    {%- if product.available -%}
-                      <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="product-card-dark__form">
-                        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-                        <button type="submit" class="btn-dark btn-dark-primary quick-add-btn" data-variant-id="{{ product.selected_or_first_available_variant.id }}">
-                          Quick Add
-                        </button>
-                      </form>
-                    {%- else -%}
-                      <span class="btn-dark btn-dark-outline" disabled>Sold Out</span>
-                    {%- endif -%}
-                  </div>
-                </div>
-
-                <div class="product-card-dark__content">
-                  <h3 class="product-card-dark__title">{{ product.title }}</h3>
-                  
-                  {%- comment -%} Rating Stars {%- endcomment -%}
-                  <div class="product-card-dark__rating">
-                    <div class="stars">
-                      {%- for i in (1..5) -%}
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="currentColor" opacity="0.3"/>
-                        </svg>
-                      {%- endfor -%}
-                    </div>
-                    <span class="rating-text">(4.8)</span>
-                  </div>
-                  
-                  <div class="product-card-dark__price">
-                    {%- if product.compare_at_price > product.price -%}
-                      <span class="price--compare">{{ product.compare_at_price | money }}</span>
-                    {%- endif -%}
-                    <span class="price--current">{{ product.price | money }}</span>
-                  </div>
-                </div>
-              </a>
+        {%- if collection.products.size > 0 -%}
+          {%- for product in collection.products limit: section.settings.products_to_show -%}
+            <div class="carousel-slide">
+              {% render 'product-card', product: product %}
             </div>
-          </div>
-        {%- endfor -%}
+          {%- endfor -%}
+        {%- else -%}
+          {%- comment -%} Beautiful fallback placeholder products {%- endcomment -%}
+          {%- assign placeholder_images = 'https://images.unsplash.com/photo-1511988617509-a57c8a288659?w=600&q=80,https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=600&q=80,https://images.unsplash.com/photo-1606800054162-98608746b2c0?w=600&q=80,https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=600&q=80' | split: ',' -%}
+          {%- assign placeholder_titles = 'Romantic Rose Bouquet,Chocolate Gift Box,Personalized Jewelry,Valentine Gift Set' | split: ',' -%}
+          {%- for i in (1..4) -%}
+            <div class="carousel-slide">
+              <div class="product-card-dark glass-card">
+                <a href="{{ routes.collections_url }}" class="product-card-dark__link">
+                  <div class="product-card-dark__image">
+                    <img src="{{ placeholder_images[forloop.index0] }}" alt="{{ placeholder_titles[forloop.index0] }}" loading="lazy" class="product-card-dark__img">
+                    <div class="product-card-dark__badges">
+                      <span class="badge-neon badge-valentine">VALENTINE</span>
+                      {%- if forloop.index == 1 -%}
+                        <span class="badge-neon badge-hot">HOT</span>
+                      {%- endif -%}
+                    </div>
+                    <div class="product-card-dark__actions">
+                      <a href="{{ routes.collections_url }}" class="btn-dark btn-dark-primary">View Products</a>
+                    </div>
+                  </div>
+                  <div class="product-card-dark__content">
+                    <h3 class="product-card-dark__title">{{ placeholder_titles[forloop.index0] }}</h3>
+                    <div class="product-card-dark__rating">
+                      <div class="stars">
+                        {%- for j in (1..5) -%}
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="currentColor"/>
+                          </svg>
+                        {%- endfor -%}
+                      </div>
+                      <span class="rating-text">(4.8)</span>
+                    </div>
+                    <div class="product-card-dark__price">
+                      <span class="price--current">${{ 29 | plus: i | times: 10 }}.00</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
       </div>
     </div>
   </div>

@@ -151,8 +151,12 @@
     }
 
     update() {
-      const translateX = -(this.currentIndex * (100 / this.options.slidesPerView));
+      if (this.slides.length === 0) return;
+      
+      const slideWidth = 100 / this.options.slidesPerView;
+      const translateX = -(this.currentIndex * slideWidth);
       this.track.style.transform = `translateX(${translateX}%)`;
+      this.track.style.width = `${(this.slides.length / this.options.slidesPerView) * 100}%`;
 
       if (this.pagination) {
         const dots = this.pagination.querySelectorAll('.carousel-pagination-dot');
